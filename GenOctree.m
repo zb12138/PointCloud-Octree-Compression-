@@ -34,7 +34,7 @@ for L=1:Lmax
               Node.childPoint(i)= {PId(idn==i)};
             end
     %      Node.occupancyCode = flip(~cellfun("isempty",Node.childPoint));
-    % fast code
+    %     fast code
             Node.occupancyCode = ismember(8:-1:1,idn);
             nodeNum = nodeNum+1;
             NodeTemp(nodeNum)=Node;
@@ -43,13 +43,6 @@ for L=1:Lmax
     Octree(L+1).node= NodeTemp(1:nodeNum);
 end
 Octree(1)=[];
-% for i=fix(4155 - 4155*1+1):4155
-%     temp = randi([0,1],[1,8]);
-%     if sum(temp)==0
-%         temp(1)=1;
-%     end
-%     Octree(Lmax).node(i).occupancyCode =temp;
-% end
 toc
 % fprintf('bpp before entropy coding:%f bit\n',nodeid*8/pointNum);
 Nodes =  arrayfun(@(S)S.node,Octree,'UniformOutput',false);

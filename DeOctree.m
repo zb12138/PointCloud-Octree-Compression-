@@ -1,6 +1,5 @@
 function ptRec = DeOctree(dtext)
 % DeOctree
-% dtext = [dtext;randi([1,255],[4155,1])];
 ptRec = DeOctree(dtext);
 function points = DeOctree(Codes)
 occupancyCode = flip(dec2bin(Codes)-'0',2);
