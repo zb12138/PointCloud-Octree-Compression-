@@ -45,9 +45,11 @@ end
 Octree(1)=[];
 toc
 % fprintf('bpp before entropy coding:%f bit\n',nodeid*8/pointNum);
-Nodes =  arrayfun(@(S)S.node,Octree,'UniformOutput',false);
-Codes=cellfun(@(S)arrayfun(@(S)S.occupancyCode,S,'UniformOutput',false),Nodes,'UniformOutput',false);
-Codes = bin2dec(num2str(cell2mat([Codes{:}]')));
+% Nodes =  arrayfun(@(S)S.node,Octree,'UniformOutput',false);
+% Codes=cellfun(@(S)arrayfun(@(S)S.occupancyCode,S,'UniformOutput',false),Nodes,'UniformOutput',false);
+% Codes = bin2dec(num2str(cell2mat([Codes{:}]')));
+Nodes = [Octree.node]';
+Codes = bin2dec(num2str(cell2mat({Nodes.occupancyCode}')));
 end
 
 function mcode= Morton(A)
