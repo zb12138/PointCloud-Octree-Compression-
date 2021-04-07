@@ -53,7 +53,7 @@ Codes = bin2dec(num2str(cell2mat({Nodes.occupancyCode}')));
 end
 
 function mcode= Morton(A)
-n = ceil(log2(max(A(:)))+1);
+n = ceil(log2(max(A(:))+1));
 x = dec2bin(A(:,1),n);
 y = dec2bin(A(:,2),n);
 z = dec2bin(A(:,3),n);
