@@ -9,7 +9,7 @@ points = p.Location;
 
 % Quantization
 qs = 1;% qs must be integer 
-points = qs*round((points - min(points))/qs);
+points = round((points - min(points))/qs);
 pt = unique(points,'rows');
 
 % Save file after quantization
@@ -51,7 +51,7 @@ dtext = feqT(dtext);
 assert(isequal(dtext,text))
 
 % Decode Octree
-ptRec = DeOctree(dtext);
+ptRec = qs*DeOctree(dtext);
 
 % Evaluate
 disp('evaluate...')
