@@ -1,7 +1,5 @@
-clear
-load('occupancyShow.mat');
 Lmax = size(Octree,2);
-pointNum = size(point,1);
+pointNum = size(pt,1);
 pcolor = zeros(pointNum,Lmax);
 for level = 1:Lmax
     ptInOccupancy = arrayfun(@(S)S.childPoint,Octree(level).node,'UniformOutput',false)';
@@ -15,5 +13,5 @@ end
 
 for i = 1:Lmax
 subplot(2,4,i);
-pcshow(point,pcolor(:,i));
+pcshow(pt,pcolor(:,i));
 end
