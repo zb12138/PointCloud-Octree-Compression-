@@ -1,6 +1,6 @@
 clear
 % Read file
-filename = 'C:\data\basketball_player_vox11_00000001.ply';
+filename = 'chair2851.ply';
 quanfilePath = strcat(filename,'enc.ply');
 binPath = strcat(filename,'bin');
 p = pcread(filename);
