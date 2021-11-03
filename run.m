@@ -59,3 +59,6 @@ decodPath = strcat(filename,'dec.ply');
 pcwrite(pointCloud(single(ptRec)),decodPath);
 Cmd=['pc_error.exe' ,' -a ',quanfilePath ,' -b ',decodPath, ' -r ','1023']; %psnr = 10log10(3*p^2/max(mse)) e.g. p = 1023
 system(Cmd);
+
+%Show occupancy code
+showOccupancyCode
