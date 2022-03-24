@@ -1,10 +1,12 @@
 % entropy coding
 function binsize = entropyCoding(text,binPath)
 % disp('entropyCoding...')
+offset = min(text);
+text = text - offset;
 feq=tabulate(text);
 feq(:,3)=[];
 feqInt = uint8((feq(:,2)./max(feq(:,2)))*255);
-feqInt = feqInt+ uint8((feq(:,2)~=0) & (double(uint8((feq(:,2)./max(feq(:,2)))*255))==0));
+feqInt = feqInt + uint8((feq(:,2)~=0) & (double(uint8((feq(:,2)./max(feq(:,2)))*255))==0));
 % feqInt = feq(:,2);
 feqC = feqInt;
 feq(feqC==0,:)=[];
@@ -19,7 +21,9 @@ bin = arithenco(text,counts);
 lenthtext= uint32(length(text));
 fileID = fopen(binPath,'w');
 fwrite(fileID,lenthtext,'uint32');
+fwrite(fileID,length(feqInt),'uint16');
 fwrite(fileID,feqInt,'uint8');
+fwrite(fileID,offset-1,'int32');
 fwrite(fileID,bin,'ubit1');
 fclose(fileID);
 % save(binPath,'bin','feqC','lenthtext');
