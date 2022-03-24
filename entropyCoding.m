@@ -1,17 +1,16 @@
 % entropy coding
 function binsize = entropyCoding(text,binPath)
 % disp('entropyCoding...')
-offset = min(text);
+offset = min(text)-1;
 text = text - offset;
 feq=tabulate(text);
-feq(:,3)=[];
-feqInt = uint8((feq(:,2)./max(feq(:,2)))*255);
-feqInt = feqInt + uint8((feq(:,2)~=0) & (double(uint8((feq(:,2)./max(feq(:,2)))*255))==0));
-% feqInt = feq(:,2);
-feqC = feqInt;
-feq(feqC==0,:)=[];
-feqC(feqC==0)=[];
-counts = double(feqC);
+feqInt = zeros(1,max(text));
+maxcount = max(feq(:,2));
+for i=1:size(feq,1)
+    feqInt(feq(i,1)) = max( uint8((feq(i,2)./ maxcount)*255) ,1);
+end
+counts = double(feqInt);
+counts(counts==0) = [];
 temp = nan(size(text));
 for i=1:size(feq,1)
   temp(text==feq(i,1))=i;
@@ -22,11 +21,10 @@ lenthtext= uint32(length(text));
 fileID = fopen(binPath,'w');
 fwrite(fileID,lenthtext,'uint32');
 fwrite(fileID,length(feqInt),'uint16');
-fwrite(fileID,feqInt,'uint8');
-fwrite(fileID,offset-1,'int32');
+fwrite(fileID,uint8(feqInt),'uint8');
+fwrite(fileID,offset,'int32');
 fwrite(fileID,bin,'ubit1');
 fclose(fileID);
-% save(binPath,'bin','feqC','lenthtext');
 binsize = dir(binPath); 
 binsize = binsize.bytes;
 end
