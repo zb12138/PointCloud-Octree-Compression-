@@ -38,17 +38,8 @@ fprintf('bin file: %s\n',binPath);
 disp('decoding...')
 load('pathfile.mat')
 disp(['binPath: ',binPath])
-fileID = fopen(binPath);
-lenthtext =  fread(fileID,1,'uint32');
-feqC =  fread(fileID,255,'uint8');
-bin =  fread(fileID,'ubit1');
-fclose(fileID);
 % Entropy decoding
-feq = double(feqC(feqC~=0));
-dtext = arithdeco(bin,feq,lenthtext);
-feqT = find(feqC);
-dtext = feqT(dtext);
-assert(isequal(dtext,text))
+dtext = entropyDecoding(binPath);
 
 % Decode Octree
 ptRec = qs*DeOctree(dtext);
