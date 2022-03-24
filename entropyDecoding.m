@@ -11,4 +11,3 @@ feq = double(feqC(feqC~=0));
 dtext = arithdeco(bin,feq,lengthtext);
 feqT = find(feqC);
 dtext = feqT(dtext)+offset;
-fclose(fileID);
